@@ -1,6 +1,7 @@
 const { initializeApp } = require('firebase/app');
 const { getDatabase, ref: databaseRef, onValue } = require('firebase/database');
 const { getStorage, ref: storageRef} = require('firebase/storage');
+const { Board, Led } = require("johnny-five");
 
 // Firebase configuration
 const firebaseConfig = {
@@ -30,12 +31,11 @@ onValue(databaseRef(db, 'processes/7d2ef116-cbe9-44ca-bd97-f0db4967e179/State'),
 });
 
 
-/* Control arduino
-const { Board, Led } = require("johnny-five");
+// Control arduino
 const board = new Board();
 
 board.on("ready", () => {
   const led = new Led(13);
   led.blink(500);
 });
-*/
+
