@@ -1,6 +1,6 @@
-import { initializeApp } from "firebase/app";
-import { getDatabase } from "firebase/database";
-import { getStorage } from "firebase/storage";
+const { initializeApp } = require('firebase/app');
+const { getDatabase, ref: databaseRef, onValue } = require('firebase/database');
+const { getStorage, ref: storageRef} = require('firebase/storage');
 
 // Firebase configuration
 const firebaseConfig = {
@@ -15,16 +15,15 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-initializeApp(firebaseConfig);
+const firebase = initializeApp(firebaseConfig);
 
 // Get storage
 const storage = getStorage();
 
 // Get a database reference to our posts
 const db = getDatabase();
-const ref = db.ref('processes/7d2ef116-cbe9-44ca-bd97-f0db4967e179/State');
 
-ref.on('value', (snapshot) => {
+onValue(databaseRef(db, 'processes/7d2ef116-cbe9-44ca-bd97-f0db4967e179/State'), (snapshot) => {
     console.log(snapshot.val());
 }, (errorObject) => {
     console.log('The read failed: ' + errorObject.name);
