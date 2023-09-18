@@ -14,5 +14,6 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - uses: actions/setup-node@v2
+    - run: git pull
     - run: npm install
     - run: pm2 restart cloud-embroidery-raspberry
