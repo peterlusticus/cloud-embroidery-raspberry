@@ -32,7 +32,7 @@ board.on("ready", () => {
     const led = new Led(13);
 
     onValue(databaseRef(db, 'processes/7d2ef116-cbe9-44ca-bd97-f0db4967e179/State'), (snapshot) => {
-        led.blink(snapshot.val()*10);
+        led.blink(snapshot.val());
         console.log(snapshot.val());
     }, (errorObject) => {
         console.log('The read failed: ' + errorObject.name);
