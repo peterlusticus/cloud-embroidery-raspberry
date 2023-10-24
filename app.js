@@ -35,6 +35,9 @@ board.on("ready", () => {
     })
 
     onValue(databaseRef(db, 'processes/09c6a338-e763-4d7d-8aca-dcbb48e9ad3b/Speed'), (snapshot) => {
+        getDownloadURL(storageRef(storage, 'files/09c6a338-e763-4d7d-8aca-dcbb48e9ad3b/gcode.txt'), (url) =>{
+            console.log(url);
+        })
         led.blink(snapshot.val());
         console.log(snapshot.val());
     }, (errorObject) => {
