@@ -29,11 +29,21 @@ const board = new Board();
 
 
 board.on("ready", () => {
+    getDownloadURL(storageRef(storage, 'files/09c6a338-e763-4d7d-8aca-dcbb48e9ad3b/gcode.txt')).then((url) => {
+        console.log(url)
+      })
+      .catch((error) => {
+        // Handle any errors
+      });
+      
     const led = new Led(13);
-    getDownloadURL(storageRef(storage, 'files/09c6a338-e763-4d7d-8aca-dcbb48e9ad3b/gcode.txt'), (url) =>{
-        console.log(url);
-    })
-
+    getDownloadURL(storageRef(storage, 'files/09c6a338-e763-4d7d-8aca-dcbb48e9ad3b/gcode.txt')).then((url) => {
+        console.log(url)
+      })
+      .catch((error) => {
+        // Handle any errors
+      });
+    
     onValue(databaseRef(db, 'processes/09c6a338-e763-4d7d-8aca-dcbb48e9ad3b/Speed'), (snapshot) => {
         getDownloadURL(storageRef(storage, 'files/09c6a338-e763-4d7d-8aca-dcbb48e9ad3b/gcode.txt'), (url) =>{
             console.log(url);
