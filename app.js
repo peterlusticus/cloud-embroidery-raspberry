@@ -30,17 +30,12 @@ const board = new Board();
 
 board.on("ready", () => {
     getBytes(storageRef(storage, 'files/09c6a338-e763-4d7d-8aca-dcbb48e9ad3b/gcode.txt')).then((bytes) => {
-        console.log(bytes)
+        console.log(bytes.slice(1, 100))
       })
       .catch((error) => {
         // Handle any errors
       });
-      getBlob(storageRef(storage, 'files/09c6a338-e763-4d7d-8aca-dcbb48e9ad3b/gcode.txt')).then((bytes) => {
-        console.log(bytes)
-      })
-      .catch((error) => {
-        // Handle any errors
-      });
+      
       getStream(storageRef(storage, 'files/09c6a338-e763-4d7d-8aca-dcbb48e9ad3b/gcode.txt')).then((bytes) => {
         console.log(bytes)
       })
