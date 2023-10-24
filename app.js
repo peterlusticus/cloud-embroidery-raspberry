@@ -1,6 +1,6 @@
 const { initializeApp } = require('firebase/app');
 const { getDatabase, ref: databaseRef, onValue } = require('firebase/database');
-const { getStorage, ref: storageRef, getDownloadURL } = require('firebase/storage');
+const { getStorage, ref: storageRef, getDownloadURL, getBytes, getBlob, getStream } = require('firebase/storage');
 const { Board, Led } = require("johnny-five");
 
 // Firebase configuration
@@ -29,13 +29,24 @@ const board = new Board();
 
 
 board.on("ready", () => {
-    getDownloadURL(storageRef(storage, 'files/09c6a338-e763-4d7d-8aca-dcbb48e9ad3b/gcode.txt')).then((url) => {
-        console.log(url)
+    getBytes(storageRef(storage, 'files/09c6a338-e763-4d7d-8aca-dcbb48e9ad3b/gcode.txt')).then((bytes) => {
+        console.log(bytes)
       })
       .catch((error) => {
         // Handle any errors
       });
-      
+      getBlob(storageRef(storage, 'files/09c6a338-e763-4d7d-8aca-dcbb48e9ad3b/gcode.txt')).then((bytes) => {
+        console.log(bytes)
+      })
+      .catch((error) => {
+        // Handle any errors
+      });
+      getStream(storageRef(storage, 'files/09c6a338-e763-4d7d-8aca-dcbb48e9ad3b/gcode.txt')).then((bytes) => {
+        console.log(bytes)
+      })
+      .catch((error) => {
+        // Handle any errors
+      });
     const led = new Led(13);
     getDownloadURL(storageRef(storage, 'files/09c6a338-e763-4d7d-8aca-dcbb48e9ad3b/gcode.txt')).then((url) => {
         console.log(url)
