@@ -1,6 +1,6 @@
 const { initializeApp } = require('firebase/app');
 const { getDatabase, ref: databaseRef, onValue } = require('firebase/database');
-const { getStorage, ref: storageRef } = require('firebase/storage');
+const { getStorage, ref: storageRef, getDownloadURL } = require('firebase/storage');
 const { Board, Led } = require("johnny-five");
 
 // Firebase configuration
@@ -30,8 +30,11 @@ const board = new Board();
 
 board.on("ready", () => {
     const led = new Led(13);
+    getDownloadURL(storageRef(storage, 'files/09c6a338-e763-4d7d-8aca-dcbb48e9ad3b/gcode.txt'), (url) =>{
+        console.log(url);
+    })
 
-    onValue(databaseRef(db, 'processes/7d2ef116-cbe9-44ca-bd97-f0db4967e179/State'), (snapshot) => {
+    onValue(databaseRef(db, 'processes/09c6a338-e763-4d7d-8aca-dcbb48e9ad3b/Speed'), (snapshot) => {
         led.blink(snapshot.val());
         console.log(snapshot.val());
     }, (errorObject) => {
