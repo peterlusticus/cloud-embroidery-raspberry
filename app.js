@@ -47,16 +47,14 @@ board.on("ready", () => {
   })
 
   onValue(databaseRef(db, 'processes/09c6a338-e763-4d7d-8aca-dcbb48e9ad3b/Speed'), (snapshot) => {
-    getDownloadURL(ref).then(url => {
-      var xhr = new XMLHttpRequest();
-      xhr.responseType = 'text';
-      xhr.open('GET', url);
-      xhr.send();
-      xhr.onload = function (event) {
-        var gcode = xhr.response;
-        console.log(gcode);      // now you read the file content
-        
-      };
+    getDownloadURL(ref).then(async function (url) {
+      const b64 = await fetch(url)
+      .then((response) => response.buffer())
+      .then((buffer) => {
+        const b64 = buffer.toString('base64');
+        return b64;
+      })
+      .catch(console.error);
       
     }).catch(err => {
       console.log('The download failed: ' + err);
