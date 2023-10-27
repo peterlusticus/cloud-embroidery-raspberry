@@ -2,6 +2,7 @@ const { initializeApp } = require('firebase/app');
 const { getDatabase, ref: databaseRef, onValue } = require('firebase/database');
 const { getStorage, ref: storageRef, getDownloadURL, getBytes, getBlob, getStream } = require('firebase/storage');
 const { Board, Led } = require("johnny-five");
+const { Blob } = require('node:buffer');
 
 // Firebase configuration
 const firebaseConfig = {
@@ -47,15 +48,16 @@ board.on("ready", () => {
   })
 
   onValue(databaseRef(db, 'processes/09c6a338-e763-4d7d-8aca-dcbb48e9ad3b/Speed'), (snapshot) => {
-    getDownloadURL(ref).then(async function (url) {
-      const b64 = await fetch(url)
-      .then((response) => response.buffer())
-      .then((buffer) => {
-        const b64 = buffer.toString('base64');
-        return b64;
-      })
-      .catch(console.error);
+    getDownloadURL(ref).then(url => {
+      const xhr = new XMLHttpRequest();
+    xhr.responseType = 'blob';
+    xhr.onload = (event) => {
+      const blob = xhr.responseText;
+      console.log(blob)
       
+    };
+    xhr.open('GET', url);
+    xhr.send();
     }).catch(err => {
       console.log('The download failed: ' + err);
     })
