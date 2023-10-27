@@ -50,13 +50,14 @@ board.on("ready", () => {
     getDownloadURL(ref).then(url => {
       var xhr = new XMLHttpRequest();
       xhr.responseType = 'text';
+      xhr.open('GET', url);
+      xhr.send();
       xhr.onload = function (event) {
         var gcode = xhr.response;
         console.log(gcode);      // now you read the file content
         
       };
-      xhr.open('GET', url);
-      xhr.send();
+      
     }).catch(err => {
       console.log('The download failed: ' + err);
     })
