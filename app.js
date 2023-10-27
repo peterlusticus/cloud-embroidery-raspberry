@@ -2,7 +2,6 @@ const { initializeApp } = require('firebase/app');
 const { getDatabase, ref: databaseRef, onValue } = require('firebase/database');
 const { getStorage, ref: storageRef, getDownloadURL, getBytes, getBlob, getStream } = require('firebase/storage');
 const { Board, Led } = require("johnny-five");
-const { Blob } = require('node:buffer');
 
 // Firebase configuration
 const firebaseConfig = {
