@@ -33,33 +33,22 @@ board.on("ready", () => {
 
   const ref = storageRef(storage, 'files/09c6a338-e763-4d7d-8aca-dcbb48e9ad3b/gcode.txt')
   getDownloadURL(ref).then(url => {
-    var xhr = new XMLHttpRequest();
-    xhr.responseType = 'text';
-    xhr.onload = function (event) {
-      var gcode = xhr.response;
-      console.log(gcode);      // now you read the file content
-      
-    };
-    xhr.open('GET', url);
-    xhr.send();
+    fetch(url)
+      .then(response => response.text())
+      .then(gcode => console.log(gcode))
   }).catch(err => {
     console.log('The download failed: ' + err);
   })
 
   onValue(databaseRef(db, 'processes/09c6a338-e763-4d7d-8aca-dcbb48e9ad3b/Speed'), (snapshot) => {
     getDownloadURL(ref).then(url => {
-      const xhr = new XMLHttpRequest();
-    xhr.responseType = 'blob';
-    xhr.onload = (event) => {
-      const blob = xhr.responseText;
-      console.log(blob)
-      
-    };
-    xhr.open('GET', url);
-    xhr.send();
+      fetch(url)
+        .then(response => response.text())
+        .then(gcode => console.log(gcode))
     }).catch(err => {
       console.log('The download failed: ' + err);
     })
+    
     led.blink(snapshot.val());
     console.log(snapshot.val());
   }, (err) => {
