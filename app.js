@@ -49,7 +49,7 @@ board.on("ready", () => {
           var y_before = 0;
           lines.forEach(line => {
             if(line.includes('X') && line.includes('Y')){
-              const x = line.slice(line.indexOf('X') + 1, line.indexOf('Y') - 2).replace('.','')
+              const x = line.slice(line.indexOf('X') + 1, line.indexOf('Y') - 1).replace('.','')
               const y = line.slice(line.indexOf('Y') + 1, line.length).replace('.','')
               const x_steps = x_before - x
               const y_steps = y_before - y
