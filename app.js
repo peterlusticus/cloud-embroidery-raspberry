@@ -44,11 +44,18 @@ board.on("ready", () => {
     getDownloadURL(ref).then(url => {
       fetch(url)
         .then(response => response.text())
-        .then(gcode => console.log(gcode))
+        .then(gcode => {
+          //console.log(gcode)
+          const lines = gcode.split('\n');
+          for (let i = 0; i < lines.length; i++) {
+            const line = lines[i];
+            console.log(line + " juhu")
+          }
+        })
     }).catch(err => {
       console.log('The download failed: ' + err);
     })
-    
+
     led.blink(snapshot.val());
     console.log(snapshot.val());
   }, (err) => {
