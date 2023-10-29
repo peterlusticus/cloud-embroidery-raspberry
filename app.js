@@ -34,8 +34,7 @@ board.on("ready", () => {
   const ref = storageRef(storage, 'files/09c6a338-e763-4d7d-8aca-dcbb48e9ad3b/gcode.txt')
   getDownloadURL(ref).then(url => {
     fetch(url)
-      .then(response => response.text())
-      .then(gcode => console.log(gcode))
+      .then(response => console.log(response.text()))
   }).catch(err => {
     console.log('The download failed: ' + err);
   })
@@ -45,12 +44,27 @@ board.on("ready", () => {
       fetch(url)
         .then(response => response.text())
         .then(gcode => {
-          //console.log(gcode)
-          const lines = gcode.split('\n');
-          for (let i = 0; i < lines.length; i++) {
-            const line = lines[i];
-            console.log(line + " juhu")
-          }
+          const lines = gcode.split('\n')
+          var x_before = 0;
+          var y_before = 0;
+          lines.forEach(line => {
+            if(line.includes('X') && line.includes('Y')){
+              const x = line.slice(line.indexOf('X') + 1, line.indexOf('Y') - 2).replace('.','')
+              const y = line.slice(line.indexOf('Y') + 1, line.length).replace('.','')
+              const x_steps = x_before - x
+              const y_steps = y_before - y
+              x_before = x
+              y_before = y
+              console.log(x_steps, y_steps)
+              //jog(1, x_steps)
+            }
+            if(line.includes('M')){
+
+            }
+            if(line.includes('COLOR')){
+
+            }
+          });
         })
     }).catch(err => {
       console.log('The download failed: ' + err);
