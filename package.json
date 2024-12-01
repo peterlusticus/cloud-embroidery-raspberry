@@ -10,7 +10,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "firebase": "^10.4.0",
-    "johnny-five": "^2.1.0"
+    "@serialport/list": "^10.0.0",
+    "firebase": "^11.0.2",
+    "firmata-io": "^2.3.0",
+    "johnny-five": "^2.1.0",
+    "serialport": "^10.0.0",
+    "setuptools": "^0.0.1"
   }
 }
